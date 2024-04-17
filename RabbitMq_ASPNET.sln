@@ -3,14 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DFD2F094-523E-42DF-8A3D-95738B34BF64}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{F7888DD3-4201-44D1-88AC-383D9021324A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{92645A7B-6819-44D0-91C7-3D752D9607F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.API", "src\services\Client\Client.API\Client.API.csproj", "{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F7888DD3-4201-44D1-88AC-383D9021324A} = {DFD2F094-523E-42DF-8A3D-95738B34BF64}
+		{92645A7B-6819-44D0-91C7-3D752D9607F3} = {F7888DD3-4201-44D1-88AC-383D9021324A}
+		{6AF2557D-F6B7-4388-BC20-E1BF352CDF5D} = {92645A7B-6819-44D0-91C7-3D752D9607F3}
 	EndGlobalSection
 EndGlobal
