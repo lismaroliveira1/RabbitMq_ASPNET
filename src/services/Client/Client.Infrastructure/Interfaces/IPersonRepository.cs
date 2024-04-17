@@ -1,6 +1,8 @@
-﻿namespace Client.Infrastructure.Interfaces;
+﻿using Client.Domain.Entities;
 
-public interface IPersonRepository
+namespace Client.Infrastructure.Interfaces;
+
+public interface IPersonRepository <T> where T : Base
 {
-    
+    Task<T> GetAll();
 }
