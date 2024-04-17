@@ -31,7 +31,7 @@ public class PersonMap : IEntityTypeConfiguration<Person>
             builder.Property(x => x.Document)
                 .IsRequired()
                 .HasMaxLength(100)
-                .HasColumnName("role")
+                .HasColumnName("document")
                 .HasColumnType("VARCHAR(10)");
         
             builder.Property(x => x.CreateAt)
