@@ -1,6 +1,7 @@
 using Client.Domain.Entities;
 using Client.Infrastructure.Context;
 using Client.Infrastructure.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Client.Infrastructure.Repositories;
 
@@ -12,8 +13,8 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
         _context = context;
     }
 
-    Task<Person> IPersonRepository.GetAll()
+    Task<List<Person>> IPersonRepository.GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Person.AsNoTracking().ToListAsync();
     }
 }
