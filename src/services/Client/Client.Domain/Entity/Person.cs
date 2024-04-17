@@ -9,6 +9,16 @@ public class Person : Base
     public string Role {get; set;}
     public string Document {get; set;}
 
+    protected Person() {}
+
+    public Person(string name, int age, string role, string document)
+    {
+        Name = name;
+        Age = age;
+        Role = role == "admin" ? UserRole.Admin : UserRole.Default;
+        Document = document;
+    }
+
     public override bool Validate()
     {
         var validators = new PersonValidator();
