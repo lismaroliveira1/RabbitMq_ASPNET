@@ -16,7 +16,7 @@ namespace RabbitMQ.Server.Messaging
     {
         private readonly IRabbitMQPersistentConnection _persistentConnection;
         private readonly IDbContextFactory<PersonContext> myDbContextFactory;
-        public RpcServer(IRabbitMQPersistentConnection persistentConnection, IDbContextFactory<PersonContexta> dbContextFactory)
+        public RpcServer(IRabbitMQPersistentConnection persistentConnection, IDbContextFactory<PersonContext> dbContextFactory)
         {
             _persistentConnection = persistentConnection;
             myDbContextFactory = dbContextFactory;
