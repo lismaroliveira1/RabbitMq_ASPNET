@@ -1,7 +1,6 @@
 using Client.Services.Interfaces;
 using Client.Services.Profiles;
 using Microsoft.Extensions.DependencyInjection;
-using Client.Service.Services;
 
 
 namespace Client.Service.Services;
