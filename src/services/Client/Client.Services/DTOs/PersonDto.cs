@@ -1,10 +1,11 @@
 namespace Client.Services.DTOs;
 
 public class PersonDTO {
-    public string Name {get; private set;}
-    public int Age {get; private set;}
-    public string Role {get; private set;}
-    public string Document {get; private set;}
+    public long Id {get; set;}
+    public string Name {get; set;}
+    public int Age {get; set;}
+    public string Role {get; set;}
+    public string Document {get; set;}
 
     protected PersonDTO() {}
 
