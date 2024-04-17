@@ -3,7 +3,7 @@ using Client.Infrastructure.Context;
 using Client.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Motorcycle.Infrastructure.Repositories;
+namespace Client.Infrastructure.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : Base
 {
