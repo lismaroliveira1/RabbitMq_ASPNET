@@ -1,3 +1,5 @@
+using Client.Domain.Validators;
+
 namespace Client.Domain.Entities;
 
 public class Person : Base
@@ -9,7 +11,17 @@ public class Person : Base
 
     public override bool Validate()
     {
-        throw new NotImplementedException();
+        var validators = new PersonValidator();
+            var validation = validators.Validate(this);
+            if (!validation.IsValid)
+            {
+                foreach (var error in validation.Errors)
+                {
+                    _errors?.Add(error.ErrorMessage);
+                }
+                throw new Exception("Some errors are wrongs, please fix it and try again.");
+            }
+            return validation.IsValid;
     }
 
    public static class UserRole 
