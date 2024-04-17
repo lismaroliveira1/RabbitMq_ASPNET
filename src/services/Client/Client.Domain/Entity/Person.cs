@@ -4,10 +4,10 @@ namespace Client.Domain.Entities;
 
 public class Person : Base
 {
-    public string Name {get; set;}
-    public int Age {get; set;}
-    public string Role {get; set;}
-    public string Document {get; set;}
+    public string Name {get; private set;}
+    public int Age {get; private set;}
+    public string Role {get; private set;}
+    public string Document {get; private set;}
 
     protected Person() {}
 
