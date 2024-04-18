@@ -1,0 +1,27 @@
+version: '3.4'
+
+networks:
+  dev:
+    driver: bridge
+  rabbitmq_go_net:
+    driver: bridge
+
+services:
+  challender-app:
+    image: docker.io/library/challengeapp
+    depends_on:
+      - "app_db"
+    container_name: challengeapp-services
+    ports:
+      - "8088:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Passowrd=postgres;Server=app_db;Port=5433;Database=SampleDbDriver; IntegratedSecurity=true;Pooling=true;
+      - ASPNETCORE_URL=htpp://+:80
+    networks:
+      - dev
+
+volumes:
+  app_data:
