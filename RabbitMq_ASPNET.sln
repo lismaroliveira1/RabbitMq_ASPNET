@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServerLog", "ServerLog", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogger.API", "src\services\ServerLogger\ServerLogger.API\ServerLogger.API.csproj", "{8AF71293-6CF4-4733-886C-3152D7F98D5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLogger.Infra", "src\services\ServerLogger\ServerLogger.Infra\ServerLogger.Infra.csproj", "{4CE29921-93FB-4BC3-A0A8-778CDEEC6790}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{8AF71293-6CF4-4733-886C-3152D7F98D5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AF71293-6CF4-4733-886C-3152D7F98D5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AF71293-6CF4-4733-886C-3152D7F98D5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CE29921-93FB-4BC3-A0A8-778CDEEC6790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE29921-93FB-4BC3-A0A8-778CDEEC6790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE29921-93FB-4BC3-A0A8-778CDEEC6790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE29921-93FB-4BC3-A0A8-778CDEEC6790}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,5 +73,6 @@ Global
 		{2225AD0E-BE9F-4133-9E01-B59CA25FAF8C} = {92645A7B-6819-44D0-91C7-3D752D9607F3}
 		{F9468F21-5DA7-4513-9234-6F20D6466A05} = {F7888DD3-4201-44D1-88AC-383D9021324A}
 		{8AF71293-6CF4-4733-886C-3152D7F98D5A} = {F9468F21-5DA7-4513-9234-6F20D6466A05}
+		{4CE29921-93FB-4BC3-A0A8-778CDEEC6790} = {F9468F21-5DA7-4513-9234-6F20D6466A05}
 	EndGlobalSection
 EndGlobal
