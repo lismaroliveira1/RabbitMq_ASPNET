@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace Logger.API.MessageBroker
+namespace ServerLogger.Infra.Interfaces
 {
     public interface IRabbitMQPersistentConnection : IDisposable
     {
