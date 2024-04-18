@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain", "src\service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Core", "src\services\Order\Order.Core\Order.Core.csproj", "{B62B97FB-319E-4499-B286-12E269679478}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Infra", "src\services\Order\Order.Infra\Order.Infra.csproj", "{44338B66-7107-4CE4-B06B-378775C5462E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{B62B97FB-319E-4499-B286-12E269679478}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B62B97FB-319E-4499-B286-12E269679478}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B62B97FB-319E-4499-B286-12E269679478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44338B66-7107-4CE4-B06B-378775C5462E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44338B66-7107-4CE4-B06B-378775C5462E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44338B66-7107-4CE4-B06B-378775C5462E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44338B66-7107-4CE4-B06B-378775C5462E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +104,6 @@ Global
 		{6574E3C9-DDF0-47B2-BF6E-5177499EC159} = {20A4C0D9-5558-414F-A3C6-77780169913E}
 		{467EAFDB-98EB-4570-A4BC-21CB91A036F6} = {20A4C0D9-5558-414F-A3C6-77780169913E}
 		{B62B97FB-319E-4499-B286-12E269679478} = {20A4C0D9-5558-414F-A3C6-77780169913E}
+		{44338B66-7107-4CE4-B06B-378775C5462E} = {20A4C0D9-5558-414F-A3C6-77780169913E}
 	EndGlobalSection
 EndGlobal
