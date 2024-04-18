@@ -1,4 +1,5 @@
 using Client.Service.MessageBroker.Producer;
+using Client.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.API.Controllers;
@@ -6,10 +7,12 @@ namespace Client.API.Controllers;
 public class ClientController : ControllerBase {
 
     private readonly RpcClient _client;
+    private readonly IPersonService _personServices;
 
-    public ClientController(RpcClient client)
+    public ClientController(RpcClient client, IPersonService personServices)
     {
         _client = client;
+        _personServices = personServices;
     }
 
     [HttpGet]
