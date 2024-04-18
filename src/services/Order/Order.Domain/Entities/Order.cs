@@ -1,3 +1,4 @@
+using Order.Core.Exceptions;
 using Order.Domain.Validators;
 
 namespace Order.Domain.Entities;
@@ -27,7 +28,7 @@ public class OrderEntity : Base
                 {
                     _errors?.Add(error.ErrorMessage);
                 }
-                throw new Exception("Something is wrong, please fix it and try again.");
+                throw new DomainException("Something is wrong, please fix it and try again.");
             }
             return validationErrors.IsValid;
         }
