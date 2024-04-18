@@ -4,3 +4,4 @@
 **/Properties/
 **.cache
 .vs
+.vscode
