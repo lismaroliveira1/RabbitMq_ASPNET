@@ -1,14 +1,14 @@
 namespace Order.Domain.Entities;
-public class Order : Base
+public class OrderEntity : Base
 {
 
     public long OrderId { get; private set; }
     public string OrderStatus { get; private set; }
     public long Person {get; private set;}
     
-    protected Order() {}
+    protected OrderEntity() {}
 
-    public Order(long orderId, string orderStatus, long person)
+    public OrderEntity(long orderId, string orderStatus, long person)
     {
         OrderId = orderId;
         OrderStatus = orderStatus;
