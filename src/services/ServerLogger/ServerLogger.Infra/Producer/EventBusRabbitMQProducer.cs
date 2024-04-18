@@ -6,7 +6,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using ServerLogger.Infra.Interfaces;
 
-namespace User.Service.MessageBroker.Producer
+namespace ServerLogger.Infra.Producer
 {
     public class EventBusRabbitMQProducer
     {
