@@ -1,3 +1,5 @@
+using Order.Domain.Validators;
+
 namespace Order.Domain.Entities;
 public class OrderEntity : Base
 {
@@ -16,7 +18,17 @@ public class OrderEntity : Base
     }
 
     public override bool Validate()
-    {
-        throw new NotImplementedException();
-    }
+        {
+            var validators = new OrderValidator();
+            var validationErrors = validators.Validate(this);
+            if (!validationErrors.IsValid)
+            {
+                foreach (var error in validationErrors.Errors)
+                {
+                    _errors?.Add(error.ErrorMessage);
+                }
+                throw new Exception("Something is wrong, please fix it and try again.");
+            }
+            return validationErrors.IsValid;
+        }
 }
