@@ -51,6 +51,30 @@ public class OrderController : ControllerBase
         }
     }
 
+    [HttpGet]
+    [Route("/api/v1/orders")]
+    public async Task<IActionResult> GetAll(long id)
+    {
+        try
+        {
+            var orders = await _orderService.GetAll();
+            return Ok(new ResultViewModel
+            {
+                Message = "Order found successfully",
+                Success = true,
+                Data = orders
+            });
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors!));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
+        }
+    }
+
     [HttpPost]
     [Route("/api/v1/orders/create")]
     public async Task<IActionResult> Create([FromBody] CreateOrderViewModel order)
