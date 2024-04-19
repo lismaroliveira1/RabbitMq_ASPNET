@@ -76,6 +76,8 @@ public class OrderController : ControllerBase
         }
     }
 
+    [HttpPut]
+    [Route("/api/v1/order/update")]
     public async Task<IActionResult> Update([FromBody] UpdateOrderViewModel order)
     {
         try
@@ -98,11 +100,24 @@ public class OrderController : ControllerBase
             return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
         }
     }
-}
 
-public class UpdateOrderViewModel
-{
-    public long Id { get; set; }
-    public string OrderStatus { get; set; }
-    public long Person { get; set; }
+    [HttpDelete]
+    [Route("api/v1/order/delete/{id}")]
+    public async Task<IActionResult> Delete(long id) {
+        try {
+            await _orderService.Remove(id);
+            return Ok(new ResultViewModel{
+                Message = "Order deleted successfully",
+                Success = true,
+                Data = new {}
+            });
+        }catch (DomainException ex)
+        {
+            return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors!));
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
+        }
+    }
 }
