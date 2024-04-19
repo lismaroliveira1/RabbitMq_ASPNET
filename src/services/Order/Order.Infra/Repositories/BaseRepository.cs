@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Order.Domain.Entities;
 using Order.Infra.Contexts;
 using Order.Infra.Interfaces;
@@ -17,5 +18,10 @@ public class BaseRepository<T> : IBaseRepository<T> where T : Base
         return obj;
     }
 
-    
+    async Task<T> IBaseRepository<T>.Update(T obj)
+    {
+        _context.Entry(obj).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return obj;
+    }
 }
