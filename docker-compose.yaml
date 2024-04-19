@@ -7,7 +7,7 @@ networks:
     driver: bridge
 
 services:
-  challender-app:
+  asp-net-app:
     image: docker.io/library/challengeapp
     depends_on:
       - "app_db"
