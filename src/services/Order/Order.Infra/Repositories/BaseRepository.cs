@@ -31,4 +31,14 @@ public class BaseRepository<T> : IBaseRepository<T> where T : Base
             .AsNoTracking().Where(x => x.Id == id).ToListAsync();
         return obj.FirstOrDefault()!;
     }
+
+    async Task IBaseRepository<T>.Delete(long id)
+    {
+        var users = await _context.Set<T>().AsNoTracking().Where(x => x.Id == id).ToListAsync();
+        var user = users.FirstOrDefault();
+        if (user != null) {
+            _context.Remove(user);
+        await _context.SaveChangesAsync();
+        }
+    }
 }
