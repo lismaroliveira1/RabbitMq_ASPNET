@@ -1,7 +1,9 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Order.API.Utilities;
 using Order.API.ViewModels;
 using Order.Core.Exceptions;
+using Order.Services.DTOs;
 using Order.Services.Interfaces;
 
 namespace Order.API.Controllers;
@@ -9,10 +11,12 @@ namespace Order.API.Controllers;
 [ApiController]
 public class OrderController : ControllerBase {
     private readonly IOrderService _orderService;
+    private readonly IMapper _mapper;
 
-    public OrderController(IOrderService orderService)
+    public OrderController(IOrderService orderService, IMapper mapper)
     {
         _orderService = orderService;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -26,7 +30,11 @@ public class OrderController : ControllerBase {
                 Success = true,
                 Data = new {}
             }); 
-            return Ok();
+            return Ok(new ResultViewModel{
+                Message = "Order found successfully",
+                Success = true,
+                Data = orderDto
+            });
         }
         catch (DomainException ex)
         {
@@ -37,4 +45,31 @@ public class OrderController : ControllerBase {
             return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
         }
     }
+
+    [HttpPost]
+    [Route("/api/v1/orders/create")]
+    public async Task<IActionResult> Create([FromBody] CreateOrderViewModel order) {
+        try
+        {
+            var userDTO = _mapper.Map<OrderDto>(order);
+            var newOrder = await _orderService.Create(userDTO);
+            return Ok(new ResultViewModel{
+                Message = "Order created successfully",
+                Success = true,
+                Data = newOrder
+            });
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors!)); 
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
+        }
+    }
+}
+
+public class CreateOrderViewModel
+{
 }
