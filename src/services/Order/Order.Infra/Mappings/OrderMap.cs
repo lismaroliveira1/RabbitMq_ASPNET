@@ -22,7 +22,7 @@ public class OrderMap : IEntityTypeConfiguration<OrderEntity>
 
         builder.Property(x => x.Person)
             .IsRequired()
-            .HasColumnName("status")
+            .HasColumnName("person")
             .HasColumnType("BIGINT");
 
         builder.Property(x => x.CreatedAt)
