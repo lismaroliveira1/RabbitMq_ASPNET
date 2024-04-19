@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Order.Api.ViewModels;
 using Order.API.Utilities;
 using Order.API.ViewModels;
 using Order.Core.Exceptions;
@@ -68,8 +69,4 @@ public class OrderController : ControllerBase {
             return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
         }
     }
-}
-
-public class CreateOrderViewModel
-{
 }
