@@ -16,7 +16,7 @@ start:
 
 ## down: stop docker compose
 build:
-	@echo "Starting Client Service..."
-	dotnet run --project src/services/Client/Client.API/Client.API.csproj
-	@echo 
+	@echo "Building all services..."
+	dotnet build .
+	@echo
 
