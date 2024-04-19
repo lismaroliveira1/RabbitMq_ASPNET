@@ -24,4 +24,11 @@ public class BaseRepository<T> : IBaseRepository<T> where T : Base
         await _context.SaveChangesAsync();
         return obj;
     }
+
+    async Task<T> IBaseRepository<T>.Get(long id )
+    {
+        var obj = await _context.Set<T>()
+            .AsNoTracking().Where(x => x.Id == id).ToListAsync();
+        return obj.FirstOrDefault()!;
+    }
 }
