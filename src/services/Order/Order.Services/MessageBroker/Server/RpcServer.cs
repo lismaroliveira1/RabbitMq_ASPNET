@@ -3,20 +3,20 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
-using User.Infrastructure.Messages;
+using Order.Infrastructure.Messages;
+using Order.Service.MessageBroker.Core;
+using Order.Service.MessageBroker.Model;
 using Client.Service.MessageBroker;
-using Client.Service.MessageBroker.Core;
-using Client.Service.MessageBroker.Model;
-using Client.Infrastructure.Context;
-using Client.Domain.Entities;
+using Order.Infra.Contexts;
+using Order.Domain.Entities;
 
-namespace RabbitMQ.Server.Messaging
+namespace Order.Server.Messaging
 {
     public class RpcServer
     {
         private readonly IRabbitMQPersistentConnection _persistentConnection;
-        private readonly IDbContextFactory<PersonContext> myDbContextFactory;
-        public RpcServer(IRabbitMQPersistentConnection persistentConnection, IDbContextFactory<PersonContext> dbContextFactory)
+        private readonly IDbContextFactory<OrderContext> myDbContextFactory;
+        public RpcServer(IRabbitMQPersistentConnection persistentConnection, IDbContextFactory<OrderContext> dbContextFactory)
         {
             _persistentConnection = persistentConnection;
             myDbContextFactory = dbContextFactory;
@@ -54,7 +54,7 @@ namespace RabbitMQ.Server.Messaging
             var props = ea.BasicProperties;
             var replyProps = channel.CreateBasicProperties();
             replyProps.CorrelationId = props.CorrelationId;
-            List<Person> partners = new List<Person>();
+            List<OrderEntity> partners = new List<OrderEntity>();
             try
             {
                 var message = Encoding.UTF8.GetString(ea.Body.Span);
@@ -67,7 +67,7 @@ namespace RabbitMQ.Server.Messaging
                         case "GetUser":
                             var userId = int.Parse(data.Payload["Id"]);
                             var dbContext = myDbContextFactory.CreateDbContext();
-                            partners = await dbContext.Person.AsNoTracking().Where(x => x.Id == userId).ToListAsync();
+                            partners = await dbContext.Orders.AsNoTracking().Where(x => x.Id == userId).ToListAsync();
                             var user = partners.FirstOrDefault()!;
                             break;
                     }

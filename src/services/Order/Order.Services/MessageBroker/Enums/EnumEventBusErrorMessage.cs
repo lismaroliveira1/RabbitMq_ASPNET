@@ -1,4 +1,4 @@
-﻿namespace Client.Service.MessageBroker.Enums
+﻿namespace Order.Service.MessageBroker.Enums
 {
     public class EnumEventBusErrorMessage
     {

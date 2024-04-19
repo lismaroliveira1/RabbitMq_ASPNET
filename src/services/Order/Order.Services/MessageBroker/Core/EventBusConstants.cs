@@ -1,4 +1,4 @@
-﻿namespace Client.Service.MessageBroker.Core
+﻿namespace Order.Service.MessageBroker.Core
 {
     public static class EventBusConstants
     {

@@ -3,10 +3,11 @@ using System.Text;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Client.Service.MessageBroker.Core;
-using Client.Service.MessageBroker.Model;
+using Order.Service.MessageBroker.Core;
+using Order.Service.MessageBroker.Model;
+using Client.Service.MessageBroker;
 
-namespace Client.Service.MessageBroker.Producer
+namespace Order.Service.MessageBroker.Producer
 {
     public class RpcClient
     {

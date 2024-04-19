@@ -1,4 +1,4 @@
-namespace User.Infrastructure.Messages;
+namespace Order.Infrastructure.Messages;
 public record Request
 {
     public string Method { get; set;}

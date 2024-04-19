@@ -2,9 +2,10 @@
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Client.Service.MessageBroker.Core;
+using Order.Service.MessageBroker.Core;
+using Client.Service.MessageBroker;
 
-namespace Client.Service.MessageBroker.Consumers
+namespace Order.Service.MessageBroker.Consumers
 {
     public class Consumer
     {

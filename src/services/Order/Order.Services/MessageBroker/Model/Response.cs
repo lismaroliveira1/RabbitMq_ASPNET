@@ -1,6 +1,6 @@
 ﻿using Order.Domain.Entities;
 
-namespace Client.Service.MessageBroker.Model
+namespace Order.Service.MessageBroker.Model
 {
     public class Response
     {
