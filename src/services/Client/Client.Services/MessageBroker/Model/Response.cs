@@ -1,6 +1,6 @@
-﻿using Client.Domain.Entities;
+﻿using Client.Domain.Entity;
 
-namespace Client.Service.MessageBroker.Model
+namespace Client.Services.MessageBroker.Model
 {
     public class Response
     {

@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Microsoft.EntityFrameworkCore;
 using Order.Domain.Entities;
 using Order.Infra.Contexts;

@@ -1,14 +1,13 @@
-﻿namespace Order.Service.MessageBroker.Enums
+﻿namespace Order.Services.MessageBroker.Enums
 {
     public class EnumEventBusErrorMessage
     {
         public EnumEventBusErrorMessage(string message)
         {
-            this.message = message;
+            this.Message = message;
         }
 
-        public string message { get; set; }
-
+        public string Message { get; set; }
         public static EnumEventBusErrorMessage ConnectionProblem = new EnumEventBusErrorMessage("Bağlantı hatası.");
         public static EnumEventBusErrorMessage ConnectionFail = new EnumEventBusErrorMessage("Bağlantı oluşturulamadı.");
         public static EnumEventBusErrorMessage ConnectionBlocked = new EnumEventBusErrorMessage("Bağlantı engellendi. Yeniden bağlanmaya çalışıyor.");

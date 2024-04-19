@@ -1,10 +1,10 @@
 using AutoMapper;
-using Client.Domain.Entities;
+using Client.Core.Exceptions;
+using Client.Domain.Entity;
 using Client.Services.DTOs;
 using Client.Services.Interfaces;
-using Motorcycle.Core.Exceptions;
 
-namespace Client.Service.Services;
+namespace Client.Services.Services;
 
 public class PersonService : IPersonService
 {
@@ -16,26 +16,26 @@ public class PersonService : IPersonService
         _personRepository = personService;
     }
 
-    async Task<PersonDTO> IPersonService.Create(PersonDTO personDTO)
+    async Task<PersonDto> IPersonService.Create(PersonDto personDTO)
     {
         var _hasPerson = await _personRepository.Get(personDTO.Id);
         if (_hasPerson != null) throw new DomainException("This person is already registered");
         var person = _mapper.Map<Person>(personDTO);
         person.Validate();
         var newPerson = await _personRepository.Create(personDTO);
-        return _mapper.Map<PersonDTO>(newPerson);
+        return _mapper.Map<PersonDto>(newPerson);
     }
 
-    async Task<PersonDTO> IPersonService.Get(long id)
+    async Task<PersonDto> IPersonService.Get(long id)
     {
         var personDTO = await _personRepository.Get(id);
-        return _mapper.Map<PersonDTO>(personDTO);
+        return _mapper.Map<PersonDto>(personDTO);
     }
 
-    async Task<List<PersonDTO>> IPersonService.GetAll()
+    async Task<List<PersonDto>> IPersonService.GetAll()
     {
         var personDTO = await _personRepository.GetAll();
-        return _mapper.Map<List<PersonDTO>>(personDTO);
+        return _mapper.Map<List<PersonDto>>(personDTO);
     }
 
     async Task IPersonService.Remove(long id)
@@ -43,13 +43,13 @@ public class PersonService : IPersonService
         await _personRepository.Remove(id);
     }
 
-    async Task<PersonDTO> IPersonService.Update(PersonDTO personDTO)
+    async Task<PersonDto> IPersonService.Update(PersonDto personDTO)
     {
         var _hasPerson = await _personRepository.Get(personDTO.Id);
         if (_hasPerson == null) throw new DomainException("Vehicle not found");
         var vehicle = _mapper.Map<Person>(personDTO);
         vehicle.Validate();
         var newVehicle = await _personRepository.Update(personDTO);
-        return _mapper.Map<PersonDTO>(newVehicle);
+        return _mapper.Map<PersonDto>(newVehicle);
     }
 }

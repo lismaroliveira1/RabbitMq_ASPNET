@@ -1,13 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
 using Newtonsoft.Json;
+using Order.Services.MessageBroker.Core;
+using Order.Services.MessageBroker.Model;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Order.Service.MessageBroker.Core;
-using Order.Service.MessageBroker.Model;
-using Client.Service.MessageBroker;
 
-namespace Order.Service.MessageBroker.Producer
+namespace Order.Services.MessageBroker.Producer
 {
     public class RpcClient
     {

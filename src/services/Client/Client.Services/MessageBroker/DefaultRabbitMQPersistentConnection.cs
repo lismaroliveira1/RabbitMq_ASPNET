@@ -1,16 +1,17 @@
 ﻿using System.Net.Sockets;
+using Client.Services.MessageBroker;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 
-namespace Client.Service.MessageBroker
+namespace Logger.API.MessageBroker
 {
-    public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
+    public class DefaultRabbitMQPersistentConnection : IRabbitMqPersistentConnection
     {
         private readonly IConnectionFactory _connectionFactory;
-        private IConnection _connection;
+        private IConnection? _connection;
         private readonly int _retryCount;
         private bool _disposed;
 

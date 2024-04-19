@@ -1,4 +1,4 @@
-using Client.Domain.Entities;
+using Client.Domain.Entity;
 using FluentValidation;
 
 namespace Client.Domain.Validators;

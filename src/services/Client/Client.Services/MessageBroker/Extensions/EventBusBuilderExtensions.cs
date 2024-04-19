@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Client.Services.MessageBroker.Consumers;
+using Client.Services.MessageBroker.Core;
+using Client.Services.MessageBroker.Server;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RabbitMQ.Server.Messaging;
-using Client.Service.MessageBroker.Consumers;
-using Client.Service.MessageBroker.Core;
 
-namespace Client.Service.MessageBroker.Extensions
+namespace Client.Services.MessageBroker.Extensions
 {
     public static class EventBusBuilderExtensions
     {

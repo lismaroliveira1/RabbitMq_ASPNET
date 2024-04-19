@@ -1,6 +1,6 @@
 ﻿using RabbitMQ.Client;
 
-namespace Client.Service.MessageBroker.Core
+namespace Client.Services.MessageBroker.Core
 {
     public static class HelperFunctions
     {

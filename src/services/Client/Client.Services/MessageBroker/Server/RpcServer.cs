@@ -1,22 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Client.Domain.Entity;
+using Client.Infrastructure.Context;
+using Client.Services.MessageBroker.Core;
+using Client.Services.MessageBroker.Model;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
-using User.Infrastructure.Messages;
-using Client.Service.MessageBroker;
-using Client.Service.MessageBroker.Core;
-using Client.Service.MessageBroker.Model;
-using Client.Infrastructure.Context;
-using Client.Domain.Entities;
 
-namespace RabbitMQ.Server.Messaging
+namespace Client.Services.MessageBroker.Server
 {
     public class RpcServer
     {
-        private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly IRabbitMqPersistentConnection _persistentConnection;
         private readonly IDbContextFactory<PersonContext> myDbContextFactory;
-        public RpcServer(IRabbitMQPersistentConnection persistentConnection, IDbContextFactory<PersonContext> dbContextFactory)
+        public RpcServer(IRabbitMqPersistentConnection persistentConnection, IDbContextFactory<PersonContext> dbContextFactory)
         {
             _persistentConnection = persistentConnection;
             myDbContextFactory = dbContextFactory;

@@ -1,5 +1,4 @@
-using System.Buffers.Text;
-using Client.Domain.Entities;
+using Client.Domain.Entity;
 
 namespace Client.Infrastructure.Interfaces;
 public interface IBaseRepository<T> where T : Base {

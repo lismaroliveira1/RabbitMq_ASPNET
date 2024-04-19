@@ -1,5 +1,5 @@
-using Client.Service.MessageBroker.Producer;
 using Client.Services.Interfaces;
+using Client.Services.MessageBroker.Producer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.API.Controllers;

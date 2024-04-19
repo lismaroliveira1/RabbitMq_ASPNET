@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Client.Domain.Entities;
+namespace Client.Domain.Entity;
 
 public abstract  class Base {
     [Key]

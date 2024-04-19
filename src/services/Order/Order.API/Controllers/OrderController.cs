@@ -10,24 +10,15 @@ using Order.Services.Interfaces;
 namespace Order.API.Controllers;
 
 [ApiController]
-public class OrderController : ControllerBase
+public class OrderController(IOrderService orderService, IMapper mapper) : ControllerBase
 {
-    private readonly IOrderService _orderService;
-    private readonly IMapper _mapper;
-
-    public OrderController(IOrderService orderService, IMapper mapper)
-    {
-        _orderService = orderService;
-        _mapper = mapper;
-    }
-
     [HttpGet]
     [Route("/api/v1/orders/{id}")]
     public async Task<IActionResult> Get(long id)
     {
         try
         {
-            var orderDto = await _orderService.Get(id);
+            var orderDto = await orderService.Get(id);
             if (orderDto == null) return Ok(new ResultViewModel
             {
                 Message = "Order not found",
@@ -57,7 +48,7 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var orders = await _orderService.GetAll();
+            var orders = await orderService.GetAll();
             return Ok(new ResultViewModel
             {
                 Message = "Order found successfully",
@@ -81,8 +72,8 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var userDTO = _mapper.Map<OrderDto>(order);
-            var newOrder = await _orderService.Create(userDTO);
+            var userDTO = mapper.Map<OrderDto>(order);
+            var newOrder = await orderService.Create(userDTO);
             return Ok(new ResultViewModel
             {
                 Message = "Order created successfully",
@@ -106,8 +97,8 @@ public class OrderController : ControllerBase
     {
         try
         {
-            var orderDto = _mapper.Map<OrderDto>(order);
-            var orderUpdated = await _orderService.Update(orderDto);
+            var orderDto = mapper.Map<OrderDto>(order);
+            var orderUpdated = await orderService.Update(orderDto);
             return Ok(new ResultViewModel
             {
                 Message = "Order updated successfully",
@@ -129,7 +120,7 @@ public class OrderController : ControllerBase
     [Route("api/v1/order/delete/{id}")]
     public async Task<IActionResult> Delete(long id) {
         try {
-            await _orderService.Remove(id);
+            await orderService.Remove(id);
             return Ok(new ResultViewModel{
                 Message = "Order deleted successfully",
                 Success = true,

@@ -1,16 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Order.Domain.Entities;
+using Order.Infra.Contexts;
+using Order.Services.MessageBroker.Core;
+using Order.Services.MessageBroker.Model;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
-using Order.Infrastructure.Messages;
-using Order.Service.MessageBroker.Core;
-using Order.Service.MessageBroker.Model;
-using Client.Service.MessageBroker;
-using Order.Infra.Contexts;
-using Order.Domain.Entities;
 
-namespace Order.Server.Messaging
+namespace Order.Services.MessageBroker.Server
 {
     public class RpcServer
     {

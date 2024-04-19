@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Order.Domain.Entities;
 using Order.Infra.Interfaces;
+using Order.Infra.Mappings;
 
 namespace Order.Infra.Contexts;
 

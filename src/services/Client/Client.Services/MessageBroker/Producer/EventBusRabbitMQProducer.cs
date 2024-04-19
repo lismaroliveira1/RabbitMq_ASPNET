@@ -5,13 +5,13 @@ using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 
-namespace Client.Service.MessageBroker.Producer
+namespace Client.Services.MessageBroker.Producer
 {
     public class EventBusRabbitMQProducer
     {
-        private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly IRabbitMqPersistentConnection _persistentConnection;
 
-        public EventBusRabbitMQProducer(IRabbitMQPersistentConnection persistentConnection)
+        public EventBusRabbitMQProducer(IRabbitMqPersistentConnection persistentConnection)
         {
             _persistentConnection = persistentConnection;
         }

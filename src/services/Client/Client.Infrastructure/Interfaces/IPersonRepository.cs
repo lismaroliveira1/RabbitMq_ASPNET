@@ -1,4 +1,4 @@
-﻿using Client.Domain.Entities;
+﻿using Client.Domain.Entity;
 
 namespace Client.Infrastructure.Interfaces;
 

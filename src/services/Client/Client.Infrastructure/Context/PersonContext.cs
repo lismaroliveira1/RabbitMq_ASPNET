@@ -1,4 +1,4 @@
-﻿using Client.Domain.Entities;
+﻿using Client.Domain.Entity;
 using Client.Infrastructure.Mappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ public class PersonContext :DbContext
     public PersonContext() {}
     public PersonContext(DbContextOptions options) : base(options) { }
 
-    public virtual DbSet<Person> Person { get; set; }
+    public virtual required DbSet<Person> Person { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new PersonMap());

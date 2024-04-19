@@ -1,12 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Text;
+using Client.Services.MessageBroker.Core;
+using Client.Services.MessageBroker.Model;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Client.Service.MessageBroker.Core;
-using Client.Service.MessageBroker.Model;
 
-namespace Client.Service.MessageBroker.Producer
+namespace Client.Services.MessageBroker.Producer
 {
     public class RpcClient
     {
@@ -15,9 +15,9 @@ namespace Client.Service.MessageBroker.Producer
         private readonly EventingBasicConsumer consumer;
         private readonly BlockingCollection<string> respQueue = new BlockingCollection<string>();
         private readonly IBasicProperties props;
-        private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly IRabbitMqPersistentConnection _persistentConnection;
 
-        public RpcClient(IRabbitMQPersistentConnection persistentConnection)
+        public RpcClient(IRabbitMqPersistentConnection persistentConnection)
         {
             _persistentConnection = persistentConnection;
 

@@ -1,4 +1,4 @@
-using Client.Domain.Entities;
+using Client.Domain.Entity;
 using Client.Infrastructure.Context;
 using Client.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;

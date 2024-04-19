@@ -1,16 +1,16 @@
 ﻿using System.Text;
+using Client.Services.MessageBroker.Core;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using Client.Service.MessageBroker.Core;
 
-namespace Client.Service.MessageBroker.Consumers
+namespace Client.Services.MessageBroker.Consumers
 {
     public class Consumer
     {
-        private readonly IRabbitMQPersistentConnection _persistentConnection;
+        private readonly IRabbitMqPersistentConnection _persistentConnection;
 
-        public Consumer(IRabbitMQPersistentConnection persistentConnection)
+        public Consumer(IRabbitMqPersistentConnection persistentConnection)
         {
             _persistentConnection = persistentConnection;
         }

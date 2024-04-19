@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Order.Server.Messaging;
-using Order.Service.MessageBroker.Consumers;
-using Order.Service.MessageBroker.Core;
+using Order.Services.MessageBroker.Consumers;
+using Order.Services.MessageBroker.Core;
+using Order.Services.MessageBroker.Server;
 
-namespace Order.Service.MessageBroker.Extensions
+namespace Order.Services.MessageBroker.Extensions
 {
     public static class EventBusBuilderExtensions
     {

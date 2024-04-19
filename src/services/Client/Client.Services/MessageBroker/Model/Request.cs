@@ -1,4 +1,4 @@
-namespace User.Infrastructure.Messages;
+namespace Client.Services.MessageBroker.Model;
 public record Request
 {
     public string Method { get; set;}

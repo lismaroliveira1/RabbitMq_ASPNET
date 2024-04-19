@@ -1,4 +1,7 @@
 using Microsoft.OpenApi.Models;
+using Order.Infra;
+using Order.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +36,8 @@ builder.Services.AddSwaggerGen(ctx =>  {
         });
 });
 builder.Services.AddControllers();
+builder.Services.AddServiceModules();
+builder.Services.AddInfraModules();
 
 var app = builder.Build();
 

@@ -1,12 +1,12 @@
 using System.Net.Sockets;
-using Client.Infrastructure.Interfaces;
+using Client.Services.Interfaces;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 
-namespace Client.Infrastructure.BusConnections;
+namespace Client.Services.MessageBroker.BusConnections;
 
 public class DefaultConnection : IMessageBrokerPersistentConnection
 {

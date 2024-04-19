@@ -5,7 +5,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
 
-namespace Client.Service.MessageBroker
+namespace Order.Services.MessageBroker
 {
     public class DefaultRabbitMQPersistentConnection : IRabbitMQPersistentConnection
     {

@@ -1,8 +1,8 @@
 ﻿using RabbitMQ.Client;
 
-namespace Client.Service.MessageBroker
+namespace Client.Services.MessageBroker
 {
-    public interface IRabbitMQPersistentConnection : IDisposable
+    public interface IRabbitMqPersistentConnection : IDisposable
     {
         bool IsConnected { get; }
         bool TryConnect();

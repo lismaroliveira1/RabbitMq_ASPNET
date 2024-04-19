@@ -2,6 +2,6 @@ namespace Order.Api.ViewModels;
 
 public class CreateOrderViewModel
 {
-    public string OrderStatus { get; set; }
-    public long Person {get; set;}
+    public required string OrderStatus { get; set; }
+    public required long Person {get; set;}
 }

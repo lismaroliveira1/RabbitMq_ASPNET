@@ -3,9 +3,9 @@ using Client.Services.DTOs;
 namespace Client.Services.Interfaces;
 
 public interface IPersonService {
-    Task<PersonDTO> Create(PersonDTO personDTO);
-    Task<PersonDTO> Update(PersonDTO personDTO);
+    Task<PersonDto> Create(PersonDto personDto);
+    Task<PersonDto> Update(PersonDto personDto);
     Task Remove(long id);
-    Task<PersonDTO> Get(long id);
-    Task<List<PersonDTO>> GetAll();
+    Task<PersonDto> Get(long id);
+    Task<List<PersonDto>> GetAll();
 }

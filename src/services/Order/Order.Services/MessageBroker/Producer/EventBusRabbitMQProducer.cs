@@ -1,12 +1,11 @@
 ﻿using System.Net.Sockets;
 using System.Text;
-using Client.Service.MessageBroker;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 
-namespace Order.Service.MessageBroker.Producer
+namespace Order.Services.MessageBroker.Producer
 {
     public class EventBusRabbitMQProducer
     {

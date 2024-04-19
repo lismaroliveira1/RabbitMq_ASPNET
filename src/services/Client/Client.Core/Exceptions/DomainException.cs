@@ -1,4 +1,4 @@
-namespace Motorcycle.Core.Exceptions
+namespace Client.Core.Exceptions
 {
     public class DomainException : Exception {
         public List<string>? Errors { get; }
