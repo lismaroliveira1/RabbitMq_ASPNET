@@ -4,7 +4,6 @@ using Order.Domain.Entities;
 using Order.Infra.Interfaces;
 using Order.Services.DTOs;
 using Order.Services.Interfaces;
-using Order.Services.MessageBroker.Producer;
 
 namespace Order.Services.Bundles;
 

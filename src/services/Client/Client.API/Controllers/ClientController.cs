@@ -1,17 +1,14 @@
 using Client.Services.Interfaces;
-using Client.Services.MessageBroker.Producer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Client.API.Controllers;
 [ApiController]
 public class ClientController : ControllerBase {
 
-    private readonly RpcClient _client;
     private readonly IPersonService _personServices;
 
-    public ClientController(RpcClient client, IPersonService personServices)
+    public ClientController(IPersonService personServices)
     {
-        _client = client;
         _personServices = personServices;
     }
 
@@ -20,9 +17,7 @@ public class ClientController : ControllerBase {
      public async Task<IActionResult> SignIn(long id)
     {
         try
-        {   Dictionary<string, string> payload = new Dictionary<string, string>();
-            payload.Add("Id",  id.ToString());
-            var user = _client.Call<RequestMessage>(new RequestMessage { Method = "GetUser", Payload = payload });
+        {   
             return Ok();
         }
         catch (Exception ex)
