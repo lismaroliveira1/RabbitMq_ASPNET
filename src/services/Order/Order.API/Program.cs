@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Order.Infra;
 using Order.Services;
+using Order.Services.MessageBroker.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+var serviceProvider = builder.Services.BuildServiceProvider();
+app.UseRabbitListener(serviceProvider);
 app.MapControllers();
 
 app.Run();
