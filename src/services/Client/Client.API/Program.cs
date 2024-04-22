@@ -2,25 +2,19 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
 builder.Services.AddSwaggerGen(ctx =>  {
     ctx.SwaggerDoc("v1", new OpenApiInfo {
-        Title = "Async Communication",
+        Title = "Challenge API",
         Version = "v1",
-        Description = "This project is builded in order to provide configurations regarding asynchronous communication between microservices ",
+        Description = "The is API is builded for win the challenge",
         Contact = new OpenApiContact {
             Name = "Lismar Oliveira",
-            Email ="englismaroliveira@gmail.com",
+            Email ="englismarOliveira@gmail.com",
             Url = new Uri("https://www.linkedin.com/in/lismar-oliveira-9a93ba94/")
         }
-    });
-
-    ctx.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
-        In = ParameterLocation.Header,
-        Description = "The bearer token is mandatory.",
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
     });
     
     ctx.AddSecurityRequirement(new OpenApiSecurityRequirement()
@@ -39,9 +33,9 @@ builder.Services.AddSwaggerGen(ctx =>  {
         });
 });
 builder.Services.AddControllers();
-
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -49,7 +43,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.Run();
+
