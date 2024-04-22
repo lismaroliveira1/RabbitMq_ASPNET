@@ -1,4 +1,4 @@
-﻿namespace RabbitMQ.EventBus.Core
+﻿namespace MessageBroker.EventBus.Core
 {
     public static class EventBusConstants
     {

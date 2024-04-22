@@ -1,8 +1,8 @@
 ﻿using RabbitMQ.Client;
 
-namespace RabbitMQ.EventBus
+namespace MessageBroker.EventBus
 {
-    public interface IRabbitMQPersistentConnection : IDisposable
+    public interface IBusConnection : IDisposable
     {
         bool IsConnected { get; }
         bool TryConnect();

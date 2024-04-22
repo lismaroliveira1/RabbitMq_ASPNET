@@ -17,9 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MessageBroker\MessageBroker.EventBus\MessageBroker.EventBus.csproj" />
     <ProjectReference Include="..\Client.Domain\Client.Domain.csproj" />
     <ProjectReference Include="..\Client.Infrastructure\Client.Infrastructure.csproj" />
     <ProjectReference Include="..\Client.Core\Client.Core.csproj" />
+    <ProjectReference Include="..\..\..\MessagerBroker\RabbitMQ.EventBus\RabbitMQ.EventBus.csproj" />
   </ItemGroup>
 
 </Project>

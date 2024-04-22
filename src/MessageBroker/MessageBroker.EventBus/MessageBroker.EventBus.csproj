@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>MessageBroker.EventBus</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RabbitMQ.Core\RabbitMQ.Core.csproj" />
+    <ProjectReference Include="..\MessageBroker.Core\MessageBroker.Core.csproj" />
   </ItemGroup>
 
 </Project>

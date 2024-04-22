@@ -10,6 +10,7 @@ start:
 	@echo "Starting services..."
 	@echo "Starting Client Service"
 	dotnet run --project src/services/Client/Client.API/Client.API.csproj
+	xterm ./my_client &
 	@echo "Starting Logger Service"
 	dotnet run --project src/services/ServerLogger/ServerLogger.API/ServerLogger.API.csproj
 	read "Sevices started succesfully... Press enter to continue"

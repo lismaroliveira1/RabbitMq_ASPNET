@@ -1,4 +1,7 @@
 using Microsoft.OpenApi.Models;
+using Client.Services;
+using Client.Infrastructure;
+using Client.Services.Messaging.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +36,8 @@ builder.Services.AddSwaggerGen(ctx =>  {
         });
 });
 builder.Services.AddControllers();
+builder.Services.AddInfraModules();
+builder.Services.AddServiceModules(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +48,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+var serviceProvider = builder.Services.BuildServiceProvider();
+app.UseRabbitListener(serviceProvider);
 app.MapControllers();
 
 app.Run();

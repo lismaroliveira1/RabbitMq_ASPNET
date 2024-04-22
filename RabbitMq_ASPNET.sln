@@ -35,9 +35,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Services", "src\servi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageBroker", "MessageBroker", "{AE4F570D-DEA9-4823-A35E-1CE934821222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ.Core", "src\MessagerBroker\RabbitMQ.Core\RabbitMQ.Core.csproj", "{900E497A-73A1-4F00-9A1D-71CA87DE47B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker.Core", "src\MessageBroker\MessageBroker.Core\MessageBroker.Core.csproj", "{900E497A-73A1-4F00-9A1D-71CA87DE47B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client.API", "src\services\Client\Client.API\Client.API.csproj", "{7DF36D6C-C49A-4378-80E1-FEEC7748BABA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageBroker.EventBus", "src\MessageBroker\MessageBroker.EventBus\MessageBroker.EventBus.csproj", "{BB59119F-0238-40DA-B182-66E46F6A6F5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{7DF36D6C-C49A-4378-80E1-FEEC7748BABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DF36D6C-C49A-4378-80E1-FEEC7748BABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DF36D6C-C49A-4378-80E1-FEEC7748BABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB59119F-0238-40DA-B182-66E46F6A6F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB59119F-0238-40DA-B182-66E46F6A6F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB59119F-0238-40DA-B182-66E46F6A6F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB59119F-0238-40DA-B182-66E46F6A6F5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,5 +121,6 @@ Global
 		{AE4F570D-DEA9-4823-A35E-1CE934821222} = {DFD2F094-523E-42DF-8A3D-95738B34BF64}
 		{900E497A-73A1-4F00-9A1D-71CA87DE47B7} = {AE4F570D-DEA9-4823-A35E-1CE934821222}
 		{7DF36D6C-C49A-4378-80E1-FEEC7748BABA} = {92645A7B-6819-44D0-91C7-3D752D9607F3}
+		{BB59119F-0238-40DA-B182-66E46F6A6F5C} = {AE4F570D-DEA9-4823-A35E-1CE934821222}
 	EndGlobalSection
 EndGlobal
