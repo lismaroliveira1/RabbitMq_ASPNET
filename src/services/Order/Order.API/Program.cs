@@ -1,6 +1,8 @@
+using MessageBroker.EventBus;
 using Microsoft.OpenApi.Models;
 using Order.Infra;
 using Order.Services;
+using RabbitMQ.Client;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +38,29 @@ builder.Services.AddSwaggerGen(ctx =>  {
         });
 });
 builder.Services.AddControllers();
+builder.Services.AddSingleton<IBusConnection>(sp =>
+{
+    var factory = new ConnectionFactory()
+    {
+        HostName = builder.Configuration["BusConnection:HostName"]
+
+    };
+    factory.AutomaticRecoveryEnabled = true;
+    factory.NetworkRecoveryInterval = TimeSpan.FromSeconds(5);
+    factory.TopologyRecoveryEnabled = true;
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:UserName"]))
+        factory.UserName = builder.Configuration["BusConnection:UserName"];
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:Password"]))
+        factory.Password = builder.Configuration["BusConnection:Password"];
+    var retryCount = 10;
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:RetryCount"]))
+        retryCount = int.Parse(builder.Configuration["BusConnection:RetryCount"]);
+
+    return new BusConnection(factory, retryCount);
+});
 builder.Services.AddServiceModules();
 builder.Services.AddInfraModules();
 

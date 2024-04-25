@@ -2,6 +2,8 @@ using Microsoft.OpenApi.Models;
 using Client.Services;
 using Client.Infrastructure;
 using Client.Services.Messaging.Extensions;
+using MessageBroker.EventBus;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,23 +37,44 @@ builder.Services.AddSwaggerGen(ctx =>  {
           }
         });
 });
+builder.Services.AddSingleton<IBusConnection>(sp =>
+{
+    var factory = new ConnectionFactory()
+    {
+        HostName = builder.Configuration["BusConnection:HostName"]
+
+    };
+    factory.AutomaticRecoveryEnabled = true;
+    factory.NetworkRecoveryInterval = TimeSpan.FromSeconds(5);
+    factory.TopologyRecoveryEnabled = true;
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:UserName"]))
+        factory.UserName = builder.Configuration["BusConnection:UserName"];
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:Password"]))
+        factory.Password = builder.Configuration["BusConnection:Password"];
+      
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:Port"]))
+        factory.Port = int.Parse(builder.Configuration["BusConnection:Port"]!);
+    var retryCount = 10;
+
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:RetryCount"]))
+        retryCount = int.Parse(builder.Configuration["BusConnection:RetryCount"]!);
+
+    return new BusConnection(factory, retryCount);
+});
 builder.Services.AddControllers();
 builder.Services.AddInfraModules();
 builder.Services.AddServiceModules(); 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
+app.UseSwagger();
     app.UseSwaggerUI(c =>
      {
      	c.SwaggerEndpoint("/swagger/v1/swagger.json", "Motorcycle V1");
      	c.RoutePrefix = "order/docs";
      });
-}
 
-app.UseHttpsRedirection();
 var serviceProvider = builder.Services.BuildServiceProvider();
 app.UseRabbitListener(serviceProvider);
 app.MapControllers();

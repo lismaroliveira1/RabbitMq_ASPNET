@@ -3,25 +3,8 @@ version: '3.4'
 networks:
   dev:
     driver: bridge
-  rabbitmq_go_net:
-    driver: bridge
 
 services:
-  asp-net-app:
-    image: docker.io/library/challengeapp
-    depends_on:
-      - postgres
-    container_name: challengeapp-services
-    ports:
-      - "8088:80"
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      - ConnectionStrings__DefaultConnection=User ID=postgres;Passowrd=postgres;Server=app_db;Port=5433;Database=SampleDbDriver; IntegratedSecurity=true;Pooling=true;
-      - ASPNETCORE_URL=htpp://+:80
-    networks:
-      - dev
   postgres:
     image: postgres:latest
     container_name: app_db
@@ -36,33 +19,61 @@ services:
       - app_data:/var/lib/postgres/data
     networks:
       - dev
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    hostname: 'rabbitmq'
+  message-bus:
+    container_name: message-bus
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+    restart: always
+    labels:
+        NAME: "rabbitmq"
     ports:
         - 5672:5672
         - 15672:15672
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-    networks:
-        - rabbitmq_go_net
   client-service:
     image: trycatchlearn/client-svc:latest
+    container_name: client
+    restart: always
     build: 
       context: .
-      dockerfile: src/services/client/Client.API/Dockerfile
+      dockerfile: src/services/Client/Client.API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONEMT=Development
       - ASPNETCORE_URLS=http://+80
       - BusConnection__HostName=rabbitmq
       - BusConnection__UserName=guest
       - BusConnection__Password=guest
+      - BusConnection__PORT=5672
       - BusConnection__RetryCount=4
       - ConnectionStrings__DefaultConnection=Host=localhost;Username=postgres;Password=postgres;Database=SampleDbDriver; PORT=5433
+    ports:
+      - "5169:80"
     depends_on:
       - postgres
-      - rabbitmq
+      - message-bus
+  order-service:
+    image: trycatchlearn/order-svc:latest
+    container_name: order
+    restart: always
+    build: 
+      context: .
+      dockerfile: src/services/Order/Order.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONEMT=Development
+      - ASPNETCORE_URLS=http://+80
+      - BusConnection__HostName=rabbitmq
+      - BusConnection__UserName=guest
+      - BusConnection__Password=guest
+      - BusConnection__PORT=5672
+      - BusConnection__RetryCount=4
+      - ConnectionStrings__DefaultConnection=Host=localhost;Username=postgres;Password=postgres;Database=SampleDbDriver; PORT=5433
+    ports:
+      - "5207:80"
+    depends_on:
+      - postgres
+      - message-bus
 
 volumes:
   app_data:
