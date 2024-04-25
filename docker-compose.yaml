@@ -10,7 +10,7 @@ services:
   asp-net-app:
     image: docker.io/library/challengeapp
     depends_on:
-      - "app_db"
+      - postgres
     container_name: challengeapp-services
     ports:
       - "8088:80"
@@ -22,7 +22,7 @@ services:
       - ASPNETCORE_URL=htpp://+:80
     networks:
       - dev
-  app_db:
+  postgres:
     image: postgres:latest
     container_name: app_db
     environment:
@@ -38,7 +38,7 @@ services:
       - dev
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
+    hostname: 'rabbitmq'
     ports:
         - 5672:5672
         - 15672:15672
@@ -47,6 +47,22 @@ services:
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
         - rabbitmq_go_net
+  client-service:
+    image: trycatchlearn/client-svc:latest
+    build: 
+      context: .
+      dockerfile: src/services/client/Client.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONEMT=Development
+      - ASPNETCORE_URLS=http://+80
+      - BusConnection__HostName=rabbitmq
+      - BusConnection__UserName=guest
+      - BusConnection__Password=guest
+      - BusConnection__RetryCount=4
+      - ConnectionStrings__DefaultConnection=Host=localhost;Username=postgres;Password=postgres;Database=SampleDbDriver; PORT=5433
+    depends_on:
+      - postgres
+      - rabbitmq
 
 volumes:
   app_data:

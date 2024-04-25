@@ -1,0 +1,9 @@
+.DS_STORE
+**/obj/
+**/bin/
+**/Properties/
+**.cache
+.vs
+.vscode
+.fake
+.idea
