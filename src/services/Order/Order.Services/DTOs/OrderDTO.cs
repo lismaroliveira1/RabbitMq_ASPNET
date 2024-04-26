@@ -6,7 +6,7 @@ public class OrderDto {
         OrderStatus = orderStatus;
         Person = person;
     }
-    protected OrderDto () {}
+    public OrderDto () {}
     public long Id {get; set;}
     public string OrderStatus { get; set; }
     public long Person {get; set;}
