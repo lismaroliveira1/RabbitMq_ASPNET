@@ -66,5 +66,35 @@ public class ServiceTest
         act.Should().ThrowAsync<DomainException>();
     }
 
-    
+    [Fact(DisplayName = "Order Get by Id")]
+    public async Task ShouldProvideAValidUserIfValidUserId() {
+        //Arranges
+        var userId = new Randomizer().Int(1, 9999999);
+        var OrderDto = orderDtoBogus.Generate();
+        var Order = _mapper.Map<OrderEntity>(OrderDto);
+        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => Order);
+        //Act
+        var result = await _sut.Get(userId);
+        
+        //Assert
+        result.Should().BeEquivalentTo(OrderDto);
+    }
+
+    [Fact(DisplayName = "User get all orders")]
+    public async void ShouldReturnsAllUsers()
+    {
+        //Arranges
+        var orderDto = orderDtoBogus.Generate();
+        var order = _mapper.Map<OrderEntity>(orderDto);
+        var orders = new List<OrderEntity>();
+        orders.Add(order);
+       _orderRepository.Setup(x => x.GetAll()).Returns(async () => orders);
+
+        //Act
+        var result = await _sut.GetAll();
+
+        //Assert
+        result.Should().BeEquivalentTo(_mapper.Map<List<OrderDto>>(orders));
+    }
+
 }
