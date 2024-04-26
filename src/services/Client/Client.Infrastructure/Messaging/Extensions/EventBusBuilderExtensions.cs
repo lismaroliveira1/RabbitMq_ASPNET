@@ -1,11 +1,10 @@
-﻿using Client.Services.Messaging;
-using Client.Services.Messaging.Consumers;
+﻿using Client.Infrastructure.Messaging.Consumers;
 using MessageBroker.EventBus.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Client.Services.Messaging.Extensions
+namespace Client.Infrastructure.Messaging.Extensions
 {
     public static class EventBusBuilderExtensions
     {

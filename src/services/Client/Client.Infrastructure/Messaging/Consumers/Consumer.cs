@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System.Text;
+﻿using System.Text;
 using MessageBroker.EventBus;
 using MessageBroker.EventBus.Core;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
-namespace Client.Services.Messaging.Consumers
+namespace Client.Infrastructure.Messaging.Consumers
 {
     public class Consumer
     {

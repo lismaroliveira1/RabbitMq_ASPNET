@@ -1,7 +1,7 @@
 using Microsoft.OpenApi.Models;
 using Client.Services;
 using Client.Infrastructure;
-using Client.Services.Messaging.Extensions;
+using Client.Infrastructure.Messaging.Extensions;
 using MessageBroker.EventBus;
 using RabbitMQ.Client;
 

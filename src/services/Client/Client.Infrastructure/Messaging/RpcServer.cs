@@ -1,16 +1,16 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System.Text;
+﻿using System.Text;
+using Client.Domain.Entity;
+using Client.Infrastructure.Context;
 using MessageBroker.Core.Model;
 using MessageBroker.EventBus;
 using MessageBroker.EventBus.Core;
-using Client.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
-using Client.Infrastructure.Context;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
-namespace Client.Services.Messaging
+namespace Client.Infrastructure.Messaging
 {
     public class RpcServer
     {

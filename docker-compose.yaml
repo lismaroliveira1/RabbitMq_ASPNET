@@ -74,6 +74,27 @@ services:
     depends_on:
       - postgres
       - message-bus
+  logger-service:
+    image: trycatchlearn/logger-svc:latest
+    container_name: logger
+    restart: always
+    build: 
+      context: .
+      dockerfile: src/services/ServerLogger/ServerLogger.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONEMT=Development
+      - ASPNETCORE_URLS=http://+80
+      - BusConnection__HostName=rabbitmq
+      - BusConnection__UserName=guest
+      - BusConnection__Password=guest
+      - BusConnection__PORT=5672
+      - BusConnection__RetryCount=4
+      - ConnectionStrings__DefaultConnection=Host=localhost;Username=postgres;Password=postgres;Database=SampleDbDriver; PORT=5433
+    ports:
+      - "5025:80"
+    depends_on:
+      - postgres
+      - message-bus
 
 volumes:
   app_data:

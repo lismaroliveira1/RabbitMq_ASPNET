@@ -1,11 +1,9 @@
+using Client.Infrastructure.Messaging;
 using Client.Services.Interfaces;
-using Client.Services.Messaging;
 using Client.Services.Profiles;
 using Client.Services.Services;
-using MessageBroker.EventBus;
 using MessageBroker.EventBus.Producer;
 using Microsoft.Extensions.DependencyInjection;
-using RabbitMQ.Client;
 
 namespace Client.Services;
 public static class ServiceModules
