@@ -51,5 +51,20 @@ public class ServiceTest
         result.Should().BeEquivalentTo(orderDto);
     }
 
+    [Fact(DisplayName = "Order creating exception ")]
+    public void ShouldNotCreateAValidDTOUserAndReturnsAValidData() {
+        //Arranges
+        var orderDto = orderDtoBogus.Generate();
+        var order = _mapper.Map<OrderEntity>(orderDto);
+        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
+        _orderRepository.Setup(x => x.Create(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
+
+        //Act
+         Func<Task<OrderDto>> act = async() => await _sut.Create(orderDto);
+        
+        //Assert
+        act.Should().ThrowAsync<DomainException>();
+    }
+
     
 }
