@@ -80,7 +80,7 @@ public class ServiceTest
         result.Should().BeEquivalentTo(OrderDto);
     }
 
-    [Fact(DisplayName = "User get all orders")]
+    [Fact(DisplayName = "Order get all orders")]
     public async void ShouldReturnsAllUsers()
     {
         //Arranges
@@ -97,4 +97,20 @@ public class ServiceTest
         result.Should().BeEquivalentTo(_mapper.Map<List<OrderDto>>(orders));
     }
 
+
+    [Fact(DisplayName = "Update Order")]
+    public async void ShouldUpdateUserWithAValidData()
+    {
+        //Arranges
+        var orderDto = orderDtoBogus.Generate();
+        var order = _mapper.Map<OrderEntity>(orderDto);
+        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
+        _orderRepository.Setup(x => x.Update(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
+
+        //Act
+        var result = await _sut.Update(orderDto);
+
+        //Assert
+        result.Should().BeEquivalentTo(orderDto);
+    }
 }
