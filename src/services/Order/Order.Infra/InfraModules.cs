@@ -1,4 +1,6 @@
 
+using MessageBroker.EventBus.Interfaces;
+using MessageBroker.EventBus.Producer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Order.Infra.Contexts;
@@ -24,6 +26,7 @@ public static class InfraModules
 
     private static IServiceCollection AddServiceScoped(this IServiceCollection services) {
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IMbClient, MbClient>();
         return services;
     }
 }

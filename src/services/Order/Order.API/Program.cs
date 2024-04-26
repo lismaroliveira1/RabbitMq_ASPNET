@@ -54,10 +54,13 @@ builder.Services.AddSingleton<IBusConnection>(sp =>
 
     if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:Password"]))
         factory.Password = builder.Configuration["BusConnection:Password"];
+      
+    if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:Port"]))
+        factory.Port = int.Parse(builder.Configuration["BusConnection:Port"]!);
     var retryCount = 10;
 
     if (!string.IsNullOrWhiteSpace(builder.Configuration["BusConnection:RetryCount"]))
-        retryCount = int.Parse(builder.Configuration["BusConnection:RetryCount"]);
+        retryCount = int.Parse(builder.Configuration["BusConnection:RetryCount"]!);
 
     return new BusConnection(factory, retryCount);
 });

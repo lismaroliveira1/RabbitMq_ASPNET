@@ -23,6 +23,7 @@ public static class ServiceModules
     private static IServiceCollection AddServiceScoped(this IServiceCollection services)
     {
         services.AddScoped<IPersonService, PersonService>();
+        services.AddScoped<ILoggerService, LoggerService>();
         return services;
     }
     private static IServiceCollection AddMessageBusServicesConfig(this IServiceCollection services)

@@ -10,29 +10,35 @@ namespace Client.API.Controllers;
 
 
 [ApiController]
-public class ClientController : ControllerBase {
+public class ClientController : ControllerBase
+{
 
     private readonly IPersonService _personServices;
     private readonly IMapper _mapper;
 
-    public ClientController(IPersonService personServices, IMapper mapper)
+    private readonly ILoggerService _logger;
+
+    public ClientController(IPersonService personServices, IMapper mapper, ILoggerService logger)
     {
         _personServices = personServices;
         _mapper = mapper;
+        _logger = logger;
     }
 
     [HttpGet]
     [Route("/api/v1/clients/{id}")]
-     public async Task<IActionResult> Get(long id)
+    public async Task<IActionResult> Get(long id)
     {
         try
         {
+            _logger.LogInfo("Starting request ...");
             var personDto = await _personServices.Get(id);
             if (personDto == null) return StatusCode(404, "User not found");
+            _logger.LogInfo("Request completed successfully");
             return Ok(new ResultViewModel
             {
                 Message = "User found successfully",
-                Data = new {},
+                Data = personDto,
                 Success = true
             });
         }
@@ -45,12 +51,16 @@ public class ClientController : ControllerBase {
             return StatusCode(500, Responses.ApplicationErrorMessage(ex.Message));
         }
     }
-    
+
     [HttpGet]
     [Route("/api/v1/clients")]
-    public async Task<IActionResult> GetAll() {
-        try {
+    public async Task<IActionResult> GetAll()
+    {
+        try
+        {
+            _logger.LogInfo("Starting request ...");
             var clients = _personServices.GetAll();
+            _logger.LogInfo("Request completed successfully");
             return Ok(new ResultViewModel
             {
                 Message = "Users found successfully",
@@ -74,8 +84,10 @@ public class ClientController : ControllerBase {
     {
         try
         {
+            _logger.LogInfo("Starting request ...");
             var userDTO = _mapper.Map<PersonDto>(client);
             var newPerson = await _personServices.Create(userDTO);
+            _logger.LogInfo("Request completed successfully");
             return Ok(new ResultViewModel
             {
                 Message = "User created successfully",
@@ -99,8 +111,10 @@ public class ClientController : ControllerBase {
     {
         try
         {
+            _logger.LogInfo("Starting request ...");
             var userDTO = _mapper.Map<PersonDto>(client);
             var user = await _personServices.Update(userDTO);
+            _logger.LogInfo("Request completed successfully");
             return Ok(new ResultViewModel
             {
                 Message = "User created successfully",
@@ -120,15 +134,21 @@ public class ClientController : ControllerBase {
 
     [HttpDelete]
     [Route("api/v1/clients/delete/{id}")]
-    public async Task<IActionResult> Delete(long id) {
-        try {
+    public async Task<IActionResult> Delete(long id)
+    {
+        try
+        {
+            _logger.LogInfo("Starting request ...");
             await _personServices.Remove(id);
-            return Ok(new ResultViewModel{
+            _logger.LogInfo("Request completed successfully");
+            return Ok(new ResultViewModel
+            {
                 Message = "User deleted successfully",
                 Success = true,
-                Data = new {}
+                Data = new { }
             });
-        }catch (DomainException ex)
+        }
+        catch (DomainException ex)
         {
             return BadRequest(Responses.DomainErrorMessage(ex.Message, ex.Errors!));
         }
