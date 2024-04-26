@@ -10,7 +10,7 @@ public class PersonContext :DbContext
     public PersonContext() {}
     public PersonContext(DbContextOptions options) : base(options) { }
 
-    public virtual required DbSet<Person> Person { get; set; }
+    public virtual required DbSet<PersonEntity> Person { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new PersonMap());

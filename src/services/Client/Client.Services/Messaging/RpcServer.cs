@@ -59,12 +59,12 @@ namespace Client.Services.Messaging
                 {
                     //Business processes
                 }
-                response = JsonConvert.SerializeObject(new Response() { Success = true, Message = "Message received from server" });
+                response = JsonConvert.SerializeObject(new Response() { Success = true, Payload = "Message received from server" });
             }
             catch (Exception ex)
             {
                 //logging
-                response = JsonConvert.SerializeObject(new Response() { Success = false, Message = "Failure" });
+                response = JsonConvert.SerializeObject(new Response() { Success = false, Payload = "Failure" });
             }
             finally
             {

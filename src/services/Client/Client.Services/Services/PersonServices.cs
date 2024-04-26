@@ -11,17 +11,17 @@ public class PersonService : IPersonService
 {
     private readonly IMapper _mapper;
     private readonly IPersonRepository _personRepository;
-    public PersonService(IMapper mapper, IPersonRepository personService)
+    public PersonService(IMapper mapper, IPersonRepository personRepository)
     {
         _mapper = mapper;
-        _personRepository = personService;
+        _personRepository = personRepository;
     }
 
     async Task<PersonDto> IPersonService.Create(PersonDto personDTO)
     {
         var _hasPerson = await _personRepository.Get(personDTO.Id);
         if (_hasPerson != null) throw new DomainException("This person is already registered");
-        var person = _mapper.Map<Person>(personDTO);
+        var person = _mapper.Map<PersonEntity>(personDTO);
         person.Validate();
         var newPerson = await _personRepository.Create(person);
         return _mapper.Map<PersonDto>(newPerson);
@@ -48,7 +48,7 @@ public class PersonService : IPersonService
     {
         var _hasPerson = await _personRepository.Get(personDTO.Id);
         if (_hasPerson == null) throw new DomainException("Vehicle not found");
-        var person = _mapper.Map<Person>(personDTO);
+        var person = _mapper.Map<PersonEntity>(personDTO);
         person.Validate();
         var newPerson = await _personRepository.Update(person);
         return _mapper.Map<PersonDto>(newPerson);

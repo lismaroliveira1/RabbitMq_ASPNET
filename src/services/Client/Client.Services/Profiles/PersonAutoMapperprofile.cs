@@ -6,6 +6,6 @@ namespace Client.Services.Profiles;
 
 public class PersonAutoMapProfile : Profile {
     public PersonAutoMapProfile() {
-        CreateMap<PersonDto, Person>();
+        CreateMap<PersonDto, PersonEntity>();
     }
 }

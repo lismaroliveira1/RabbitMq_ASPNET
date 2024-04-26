@@ -1,6 +1,4 @@
 using MessageBroker.EventBus;
-using MessageBroker.EventBus.Interfaces;
-using MessageBroker.EventBus.Producer;
 using Microsoft.OpenApi.Models;
 using Order.Infra;
 using Order.Services;

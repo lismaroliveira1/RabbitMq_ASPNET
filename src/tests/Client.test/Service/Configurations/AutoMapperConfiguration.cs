@@ -10,8 +10,8 @@ public static class AutoMapperConfiguration
     {
         var autoMapperConfig = new MapperConfiguration(
             config => {
-                config.CreateMap<PersonDto, Person>();
-                config.CreateMap<Person, PersonDto>();
+                config.CreateMap<PersonDto, PersonEntity>();
+                config.CreateMap<PersonEntity, PersonDto>();
                 }
             );
         return autoMapperConfig.CreateMapper();

@@ -2,20 +2,20 @@ using Client.Domain.Validators;
 
 namespace Client.Domain.Entity;
 
-public class Person : Base
+public class PersonEntity : Base
 {
     public string Name {get; private set;}
     public int Age {get; private set;}
     public string Role {get; private set;}
     public string Document {get; private set;}
 
-    protected Person() {}
+    protected PersonEntity() {}
 
-    public Person(string name, int age, string role, string document)
+    public PersonEntity(string name, int age, string role, string document)
     {
         Name = name;
         Age = age;
-        Role = role == "admin" ? UserRole.Admin : UserRole.Default;
+        Role = role;
         Document = document;
     }
 
@@ -34,9 +34,4 @@ public class Person : Base
             return validation.IsValid;
     }
 
-   public static class UserRole 
-    {
-       public static readonly string Admin = "ADMIN";
-       public static readonly string Default = "DEFAULT";
-    }
 }

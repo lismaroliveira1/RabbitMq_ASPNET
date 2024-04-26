@@ -2,6 +2,6 @@
 
 namespace Client.Infrastructure.Interfaces;
 
-public interface IPersonRepository : IBaseRepository<Person>{
-    Task<List<Person>> GetAll();
+public interface IPersonRepository : IBaseRepository<PersonEntity>{
+    Task<List<PersonEntity>> GetAll();
 }

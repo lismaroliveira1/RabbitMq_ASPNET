@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Client.Infrastructure.Repositories;
 
-public class PersonRepository : BaseRepository<Person>, IPersonRepository
+public class PersonRepository : BaseRepository<PersonEntity>, IPersonRepository
 {
     private readonly PersonContext _context;
     public PersonRepository(PersonContext context) : base(context)
@@ -13,7 +13,7 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
         _context = context;
     }
 
-    Task<List<Person>> IPersonRepository.GetAll()
+    Task<List<PersonEntity>> IPersonRepository.GetAll()
     {
         return _context.Person.AsNoTracking().ToListAsync();
     }

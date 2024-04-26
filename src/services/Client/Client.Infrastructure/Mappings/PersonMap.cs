@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Client.Infrastructure.Mappings;
 
-public class PersonMap : IEntityTypeConfiguration<Person>
+public class PersonMap : IEntityTypeConfiguration<PersonEntity>
 {
-    public void Configure(EntityTypeBuilder<Person> builder)
+    public void Configure(EntityTypeBuilder<PersonEntity> builder)
     {
             builder.ToTable("Users");
 
