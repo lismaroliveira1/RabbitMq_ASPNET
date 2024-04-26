@@ -1,6 +1,8 @@
 using AutoMapper;
 using Bogus;
 using FluentAssertions;
+using MessageBroker.Core.Model;
+using MessageBroker.EventBus.Interfaces;
 using Moq;
 using Order.Core.Exceptions;
 using Order.Domain.Entities;
@@ -17,16 +19,19 @@ public class ServiceTest
 {
     private readonly IOrderService _sut;
     private readonly IMapper _mapper;
-    private readonly Mock<IOrderRepository> _orderRepository;
+    private readonly Mock<IOrderRepository> _orderRepositoryMock;
+
+    private readonly Mock<IMbClient> _mBClientMock;
     Bogus.Faker<OrderDto> orderDtoBogus = new Bogus.Faker<OrderDto>();
     public ServiceTest()
     {
         _mapper = AutoMapperConfiguration.GetConfig();
-        _orderRepository = new Mock<IOrderRepository>();
-
+        _orderRepositoryMock = new Mock<IOrderRepository>();
+        _mBClientMock = new Mock<IMbClient>();
         _sut = new OrderService(
             mapper: _mapper,
-            orderRepository: _orderRepository.Object
+            orderRepository: _orderRepositoryMock.Object,
+            mbClient: _mBClientMock.Object
             );
 
          orderDtoBogus.CustomInstantiator(faker => new OrderDto
@@ -41,8 +46,9 @@ public class ServiceTest
         //Arranges
         var orderDto = orderDtoBogus.Generate();
         var Order = _mapper.Map<OrderEntity>(orderDto);
-        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => null);
-        _orderRepository.Setup(x => x.Create(It.IsAny<OrderEntity>())).ReturnsAsync(() => Order);
+        _orderRepositoryMock.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => null);
+        _orderRepositoryMock.Setup(x => x.Create(It.IsAny<OrderEntity>())).ReturnsAsync(() => Order);
+        _mBClientMock.Setup(x => x.Call<Request>(It.IsAny<Request>())).Returns(() => new Response());
 
         //Act
         var result = await _sut.Create(orderDto);
@@ -56,8 +62,8 @@ public class ServiceTest
         //Arranges
         var orderDto = orderDtoBogus.Generate();
         var order = _mapper.Map<OrderEntity>(orderDto);
-        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
-        _orderRepository.Setup(x => x.Create(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
+        _orderRepositoryMock.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
+        _orderRepositoryMock.Setup(x => x.Create(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
 
         //Act
          Func<Task<OrderDto>> act = async() => await _sut.Create(orderDto);
@@ -72,7 +78,7 @@ public class ServiceTest
         var userId = new Randomizer().Int(1, 9999999);
         var OrderDto = orderDtoBogus.Generate();
         var Order = _mapper.Map<OrderEntity>(OrderDto);
-        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => Order);
+        _orderRepositoryMock.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => Order);
         //Act
         var result = await _sut.Get(userId);
         
@@ -88,7 +94,7 @@ public class ServiceTest
         var order = _mapper.Map<OrderEntity>(orderDto);
         var orders = new List<OrderEntity>();
         orders.Add(order);
-       _orderRepository.Setup(x => x.GetAll()).Returns(async () => orders);
+       _orderRepositoryMock.Setup(x => x.GetAll()).Returns(async () => orders);
 
         //Act
         var result = await _sut.GetAll();
@@ -104,8 +110,8 @@ public class ServiceTest
         //Arranges
         var orderDto = orderDtoBogus.Generate();
         var order = _mapper.Map<OrderEntity>(orderDto);
-        _orderRepository.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
-        _orderRepository.Setup(x => x.Update(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
+        _orderRepositoryMock.Setup(x => x.Get(It.IsAny<long>())).ReturnsAsync(() => order);
+        _orderRepositoryMock.Setup(x => x.Update(It.IsAny<OrderEntity>())).ReturnsAsync(() => order);
 
         //Act
         var result = await _sut.Update(orderDto);
@@ -119,13 +125,13 @@ public class ServiceTest
     {
         //Arranges
         var userId = new Randomizer().Long(1, 9999999);
-        _orderRepository.Setup(x => x.Delete(It.IsAny<long>())).Verifiable();
+        _orderRepositoryMock.Setup(x => x.Delete(It.IsAny<long>())).Verifiable();
 
 
         //Act
         await _sut.Remove(userId);
     
         //Assert
-        _orderRepository.Verify(x => x.Delete(userId), Times.Once);
+        _orderRepositoryMock.Verify(x => x.Delete(userId), Times.Once);
     }
 }

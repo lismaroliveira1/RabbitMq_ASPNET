@@ -2,13 +2,14 @@
 using System.Text;
 using MessageBroker.Core.Model;
 using MessageBroker.EventBus.Core;
+using MessageBroker.EventBus.Interfaces;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
 namespace MessageBroker.EventBus.Producer
 {
-    public class MbClient
+    public class MbClient : IMbClient
     {
         private readonly IModel _channel;
         private readonly string _replyQueueName;

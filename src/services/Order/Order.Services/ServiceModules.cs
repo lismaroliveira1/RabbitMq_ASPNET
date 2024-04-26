@@ -20,6 +20,7 @@ public static class ServiceModules {
         return services;
     }
     private static IServiceCollection AddServiceScoped(this IServiceCollection services) {
+        
         services.AddScoped<IOrderService, OrderService>();
         return services;
     }
