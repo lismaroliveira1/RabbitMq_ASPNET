@@ -6,15 +6,20 @@ using System.Text;
 using MessageBroker.Core.Model;
 using MessageBroker.EventBus;
 using MessageBroker.EventBus.Core;
+using Client.Domain.Entity;
+using Microsoft.EntityFrameworkCore;
+using Client.Infrastructure.Context;
 
 namespace Client.Services.Messaging
 {
     public class RpcServer
     {
         private readonly IBusConnection _persistentConnection;
-        public RpcServer(IBusConnection persistentConnection, IServiceScopeFactory factory)
+        private readonly IDbContextFactory<PersonContext> _context;
+        public RpcServer(IBusConnection persistentConnection, IServiceScopeFactory factory, IDbContextFactory<PersonContext> context)
         {
             _persistentConnection = persistentConnection;
+            _context = context;
         }
         public void Consume(string queue)
         {
@@ -39,10 +44,10 @@ namespace Client.Services.Messaging
             channel.BasicConsume(queue: queue, autoAck: false, consumer: consumer);
             consumer.Received += (model, ea) =>
             {
-                ReceivedEvent(model, ea, channel);
+                ReceivedEventAsync(model, ea, channel);
             };
         }
-        private void ReceivedEvent(object sender, BasicDeliverEventArgs ea, IModel channel)
+        private async Task ReceivedEventAsync(object sender, BasicDeliverEventArgs ea, IModel channel)
         {
             string response = null;
 
@@ -53,13 +58,21 @@ namespace Client.Services.Messaging
             try
             {
                 var message = Encoding.UTF8.GetString(ea.Body.Span);
-                var data = JsonConvert.DeserializeObject<dynamic>(message);
-
+                var data = JsonConvert.DeserializeObject<Request>(message);
+                List<PersonEntity> partners = new List<PersonEntity>();
                 if (ea.RoutingKey == $"{EventBusConstants.RdcPublishQueue}")
                 {
-                    //Business processes
+                    string method = data!.Method;
+                    switch (method)
+                    {
+                        case "GetUser":
+                            int userId = data.Payload["Id"];
+                            var dbContext = _context.CreateDbContext();
+                            partners = await dbContext.Person.AsNoTracking().Where(x => x.Id == userId).ToListAsync();
+                            break;
+                    }
                 }
-                response = JsonConvert.SerializeObject(new Response() { Success = true, Payload = "Message received from server" });
+                response = JsonConvert.SerializeObject(new Response() { Success = true, Payload = partners.FirstOrDefault()});
             }
             catch (Exception ex)
             {
