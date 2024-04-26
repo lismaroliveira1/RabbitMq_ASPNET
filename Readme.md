@@ -1,11 +1,5 @@
 # Clean Architecture Microservice RestFul API
 
-[![Build](https://github.com/lismaroliveira1/RabbitMq_ASPNET/actions/workflows/build.yml/badge.svg)](https://github.com/lismaroliveira1/RabbitMq_ASPNET/actions/workflows/build.yml)
-[![CodeQL](https://github.com/lismaroliveira1/RabbitMq_ASPNET/actions/workflows/codeql.yml/badge.svg)](https://github.com/lismaroliveira1/RabbitMq_ASPNET/actions/workflows/codeql.yml)
-[![Nuget](https://img.shields.io/nuget/v/Clean.Architecture.Solution.Template?label=NuGet)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template)
-[![Nuget](https://img.shields.io/nuget/dt/Clean.Architecture.Solution.Template?label=Downloads)](https://www.nuget.org/packages/Clean.Architecture.Solution.Template)
-![Twitter Follow](https://img.shields.io/twitter/follow/jasontaylordev?label=Follow&style=social)
-
 The goal of this project is to provide a straightforward and efficient approach to microservices-based RestFull API development, leveraging the power of Clean Architecture, Custom Message Bus, and ASP.NET Core. Using this template, you can easily create an API with ASP.NET Core while still following Clean Architecture principles. Getting started is easy - just install the **.NET template** (see below for full details).
 
 If you find this project useful, please give it a star. Thanks! ⭐
