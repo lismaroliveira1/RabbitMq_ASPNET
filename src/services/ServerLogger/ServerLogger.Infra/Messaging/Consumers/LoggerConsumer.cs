@@ -4,16 +4,19 @@ using MessageBroker.EventBus.Core;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using ServerLogger.Infra.Interfaces;
 
 namespace ServerLogger.Infra.Messaging.Consumers
 {
     public class Consumer
     {
         private readonly IBusConnection _persistentConnection;
+        private readonly ILoggerFactory _log;
 
-        public Consumer(IBusConnection persistentConnection)
+        public Consumer(IBusConnection persistentConnection, ILoggerFactory log)
         {
             _persistentConnection = persistentConnection;
+            _log = log;
         }
 
         public void Consume(string queue)
@@ -60,7 +63,26 @@ namespace ServerLogger.Infra.Messaging.Consumers
 
                 if (e.RoutingKey == $"{EventBusConstants.DirectQueue}")
                 {
-                    //var request = JsonConvert.DeserializeObject<>(message);
+                    string logMessage = data!["message"];
+                    switch(data["type"]) {
+                        case "Error":
+                            _log.LogError(logMessage);
+                        break;
+                        case "Info":
+                            _log.LogInfo(logMessage);
+                        break;
+                        case "Fatal":
+                            _log.LogFatal(logMessage);
+                        break;
+                        case "Debug":
+                            _log.LogDebug(logMessage);
+                        break;
+                        case "Warning":
+                            _log.LogWarning(logMessage);
+                        break;
+                    }
+                    
+                
                 }
             }
             catch (Exception ex)
