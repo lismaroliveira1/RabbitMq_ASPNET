@@ -113,4 +113,19 @@ public class ServiceTest
         //Assert
         result.Should().BeEquivalentTo(orderDto);
     }
+
+    [Fact(DisplayName = "Remove Order")]
+    public async void ShouldRemoveUserWithAValidData()
+    {
+        //Arranges
+        var userId = new Randomizer().Long(1, 9999999);
+        _orderRepository.Setup(x => x.Delete(It.IsAny<long>())).Verifiable();
+
+
+        //Act
+        await _sut.Remove(userId);
+    
+        //Assert
+        _orderRepository.Verify(x => x.Delete(userId), Times.Once);
+    }
 }
