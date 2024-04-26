@@ -28,4 +28,13 @@ build_client:
 	docker build -f src/services/Client/Client.API/Dockerfile  .
 	@echo "Done!"
 
+clean:
+	@echo "Cleaning all..."
+	docker system prune
+	@echo "Done!"
 
+test:
+	@echo "Testing all..."
+	dotnet clean
+	dotnet test
+	@echo "Done!"
